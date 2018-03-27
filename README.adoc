@@ -1,29 +1,14 @@
-= Vert.x Maven Starter
+= Vert.x Testing Question
 
-This project is a template to start your own Vert.x project using Apache Maven.
+This project is built from the Vert.x Maven Starter, a template to start your own Vert.x project using Apache Maven.
 
 == Prerequisites
 
 * Apache Maven
 * JDK 8+
 
-== Getting started
-
-Create your project with:
-
-[source]
-----
-git clone https://github.com/vert-x3/vertx-maven-starter.git PROJECT_NAME
-----
-
-Replace `PROJECT_NAME` with the name of your project.
-
-On Linux and MacOSx (or Windows with `bash`), if you want to go faster and generate an already configured project run:
-
-[source]
-----
-curl http://vertx.io/assets/starter-scripts/create-vertx-project-maven.sh -o vertx-create-maven-project.sh; bash vertx-create-maven-project.sh
-----
+== Problem Statement
+What is the best way to mock a Verticle responding to EventBus messages and to a database?
 
 == Running the project
 
