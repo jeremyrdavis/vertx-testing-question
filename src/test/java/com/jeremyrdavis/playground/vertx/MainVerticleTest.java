@@ -9,8 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.logging.Logger;
+
 @RunWith(VertxUnitRunner.class)
 public class MainVerticleTest {
+
+  Logger LOGGER = Logger.getLogger(MainVerticleTest.class.getName());
 
   private Vertx vertx;
 
@@ -28,7 +32,7 @@ public class MainVerticleTest {
   @Test
   public void testThatTheServerIsStarted(TestContext tc) {
     Async async = tc.async();
-    System.out.println("Calling localhost");
+    LOGGER.info("Calling localhost");
     vertx.createHttpClient().getNow(8080, "localhost", "/", response -> {
       tc.assertEquals(response.statusCode(), 200);
       response.bodyHandler(body -> {

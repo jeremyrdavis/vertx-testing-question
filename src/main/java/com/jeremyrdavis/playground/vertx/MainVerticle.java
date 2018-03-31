@@ -11,8 +11,6 @@ public class MainVerticle extends AbstractVerticle {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
 
-  private static final String CONFIG_HTTP = "config.http";
-
   @Override
   public void start(Future<Void> startFuture) {
 
