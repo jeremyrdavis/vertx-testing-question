@@ -1,7 +1,6 @@
-package io.vertx.starter;
+package com.jeremyrdavis.playground.vertx;
 
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpServerResponse;

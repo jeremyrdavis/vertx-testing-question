@@ -1,4 +1,4 @@
-package io.vertx.starter;
+package com.jeremyrdavis.playground.vertx;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.unit.Async;
