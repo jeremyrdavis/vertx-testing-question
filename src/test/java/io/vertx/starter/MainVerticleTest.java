@@ -28,6 +28,7 @@ public class MainVerticleTest {
   @Test
   public void testThatTheServerIsStarted(TestContext tc) {
     Async async = tc.async();
+    System.out.println("Calling localhost");
     vertx.createHttpClient().getNow(8080, "localhost", "/", response -> {
       tc.assertEquals(response.statusCode(), 200);
       response.bodyHandler(body -> {

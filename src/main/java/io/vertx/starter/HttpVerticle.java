@@ -44,6 +44,7 @@ public class HttpVerticle extends AbstractVerticle {
         config().getInteger("http.port", 8080),
         result -> {
           if (result.succeeded()) {
+            System.out.println("HttpVerticle deployed");
             startFuture.complete();
           } else {
             startFuture.fail(result.cause());

@@ -26,6 +26,7 @@ public class DBVerticle extends AbstractVerticle {
     // Configure the MongoClient inline.  This should be externalized into a config file
 //    mongoClient = MongoClient.createShared(vertx, new JsonObject().put("db_name", "mydb").put("connection_string", "mongodb://127.0.0.1:37017"));
     vertx.eventBus().consumer(DB_QUEUE, this::onMessage);
+    System.out.println("DBVerticle deployed");
     startFuture.complete();
   }
 

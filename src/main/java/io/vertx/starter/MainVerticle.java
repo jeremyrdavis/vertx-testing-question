@@ -17,23 +17,24 @@ public class MainVerticle extends AbstractVerticle {
       .put("queue.name.db", "db.queue")
       .put("config-message", "hello, config!");
 
-    Future<String> httpVerticleFuture = Future.future();
-    vertx.deployVerticle(HttpVerticle.class,
-      new DeploymentOptions().setConfig(configOptions),
-      httpVerticleFuture.completer());
+    Future<String> dbVerticleFuture = Future.future();
+    vertx.deployVerticle(DBVerticle.class, new DeploymentOptions().setConfig(configOptions), dbVerticleFuture.completer());
 
-    // chain/compose the Verticles' start methods
-    httpVerticleFuture.compose(id -> {
-      vertx.deployVerticle(DBVerticle::new, new DeploymentOptions().setConfig(configOptions),
-        httpVerticleFuture.completer());
-      return httpVerticleFuture;
-    }).setHandler(ar -> {
-      if (ar.succeeded()) {
+    dbVerticleFuture.compose(id -> {
+      Future<String> httpVerticleDeployment = Future.future();
+      vertx.deployVerticle(
+        HttpVerticle.class,  // <4>
+        new DeploymentOptions().setConfig(configOptions),    // <5>
+        httpVerticleDeployment.completer());
+
+      return httpVerticleDeployment;  // <6>
+    }).setHandler(res ->{
+      if (res.succeeded()) {
         startFuture.complete();
       } else {
-        startFuture.fail(ar.cause());
+        startFuture.fail(res.cause());
       }
-    });
 
+    });
   }
 }
