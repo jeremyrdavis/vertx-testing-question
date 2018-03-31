@@ -34,6 +34,7 @@ public class DBVerticle extends AbstractVerticle {
 
     // if our message does not contain an action
     if(!message.headers().contains("query")){
+      LOGGER.warn("No query specified");
       message.fail(1, "No Query Specified!");
     }
 

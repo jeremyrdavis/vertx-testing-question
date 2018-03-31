@@ -6,17 +6,21 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
 public class HttpVerticle extends AbstractVerticle {
 
-  private String DB_QUEUE = "db.queue";
+  private static final Logger LOGGER = LoggerFactory.getLogger(HttpVerticle.class);
+
+  private String DB_QUEUE;
 
   @Override
   public void start(Future<Void> startFuture){
 
-    System.out.println(config().getString("config-message"));
+    LOGGER.debug(config().getString("config-message"));
 
     //Pull configuration from initialization method
     JsonObject httpConfig;
@@ -26,6 +30,7 @@ public class HttpVerticle extends AbstractVerticle {
     //Create router
     Router router = Router.router(vertx);
     router.route("/").handler(routingContext -> {
+      LOGGER.debug("/ called");
       HttpServerResponse response = routingContext.response();
       response.putHeader("content-type", "text/html")
         .end("<h1>Hello, World!</h1>");
@@ -43,7 +48,7 @@ public class HttpVerticle extends AbstractVerticle {
         config().getInteger("http.port", 8080),
         result -> {
           if (result.succeeded()) {
-            System.out.println("HttpVerticle deployed");
+            LOGGER.debug("HttpVerticle deployed");
             startFuture.complete();
           } else {
             startFuture.fail(result.cause());

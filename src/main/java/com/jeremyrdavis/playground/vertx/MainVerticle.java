@@ -4,13 +4,19 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 
 public class MainVerticle extends AbstractVerticle {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
 
   private static final String CONFIG_HTTP = "config.http";
 
   @Override
   public void start(Future<Void> startFuture) {
+
+    LOGGER.debug("MainVerticle.start()");
 
     // configuration options for all Verticles
     JsonObject configOptions = new JsonObject()
@@ -36,5 +42,8 @@ public class MainVerticle extends AbstractVerticle {
       }
 
     });
+
+    LOGGER.debug("MainVerticle started");
+
   }
 }
