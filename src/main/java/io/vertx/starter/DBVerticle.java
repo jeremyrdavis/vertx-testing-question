@@ -1,6 +1,7 @@
 package io.vertx.starter;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.Json;
@@ -19,8 +20,11 @@ public class DBVerticle extends AbstractVerticle {
 
 
   public void start(Future<Void> startFuture) throws Exception{
+
+    System.out.println(config().getString("config-message"));
+
     // Configure the MongoClient inline.  This should be externalized into a config file
-    mongoClient = MongoClient.createShared(vertx, new JsonObject().put("db_name", "mydb").put("connection_string", "mongodb://127.0.0.1:37017"));
+//    mongoClient = MongoClient.createShared(vertx, new JsonObject().put("db_name", "mydb").put("connection_string", "mongodb://127.0.0.1:37017"));
     vertx.eventBus().consumer(DB_QUEUE, this::onMessage);
     startFuture.complete();
   }
@@ -43,6 +47,7 @@ public class DBVerticle extends AbstractVerticle {
 
   private void getAll(Message<JsonObject> message) {
 
+/*
         mongoClient.find("stuff", new JsonObject(), res -> {
             if(res.succeeded()){
                 System.out.println(res.result());
@@ -52,6 +57,7 @@ public class DBVerticle extends AbstractVerticle {
                 message.reply(new JsonObject().put("result", "failed").put("cause", res.cause().getCause()));
             }
         });
+*/
 
   }
 
